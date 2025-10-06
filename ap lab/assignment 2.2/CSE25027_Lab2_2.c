@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef unsigned char dnabase; // will store packed bases (2 bits each)
+typedef unsigned char dnabase; 
 
-// Map DNA base to 2-bit value
 unsigned char encodeBase(char c)
 {
     switch (c)
@@ -22,7 +21,6 @@ unsigned char encodeBase(char c)
     }
 }
 
-// Decode 2-bit value back to base
 char decodeBase(unsigned char b)
 {
     switch (b)
@@ -40,7 +38,6 @@ char decodeBase(unsigned char b)
     }
 }
 
-// Encode DNA string into dnabase array (2 bits per base)
 dnabase *encodeDNA(const char *s, int len, int *bytesUsed)
 {
     int totalBits = len * 2;
@@ -59,7 +56,6 @@ dnabase *encodeDNA(const char *s, int len, int *bytesUsed)
     return packed;
 }
 
-// Decode dnabase array back into string
 char *decodeDNA(const dnabase *packed, int len)
 {
     char *result = (char *)malloc((len + 1) * sizeof(char));
@@ -76,7 +72,6 @@ char *decodeDNA(const dnabase *packed, int len)
     return result;
 }
 
-// LCS dynamic programming (length only)
 int LCSLength(const char *X, const char *Y, int **dp)
 {
     int m = strlen(X), n = strlen(Y);
@@ -101,11 +96,11 @@ int LCSLength(const char *X, const char *Y, int **dp)
     return result;
 }
 
-// Longest Common Substring
 char *LCSubstring(const char *X, const char *Y)
 {
     int m = strlen(X), n = strlen(Y);
     int **dp = (int **)malloc((m + 1) * sizeof(int *));
+    
     for (int i = 0; i <= m; i++)
         dp[i] = (int *)calloc((n + 1), sizeof(int));
 
@@ -150,7 +145,7 @@ int main()
     int count = 0;
     while (fgets(sequences[count], sizeof(sequences[count]), fin))
     {
-        sequences[count][strcspn(sequences[count], "\r\n")] = 0; // strip newline
+        sequences[count][strcspn(sequences[count], "\r\n")] = 0;
         if (strlen(sequences[count]) > 0)
             count++;
     }
@@ -165,7 +160,6 @@ int main()
         free(encoded);
     }
 
-    // Compare all pairs
     int maxLCS = -1;
     int bestA = 0, bestB = 1;
     for (int i = 0; i < count; i++)
@@ -185,13 +179,10 @@ int main()
         }
     }
 
-    printf("\nBest pair: Seq%d & Seq%d with LCS length %d\n",
-           bestA + 1, bestB + 1, maxLCS);
+    printf("\nBest pair: Seq%d & Seq%d with LCS length %d\n", bestA + 1, bestB + 1, maxLCS);
 
-    // Longest Common Substring
     char *substr = LCSubstring(sequences[bestA], sequences[bestB]);
-    printf("Longest Common Substring between best pair: %s (length %lu)\n",
-           substr, strlen(substr));
+    printf("Longest Common Substring between best pair: %s (length %lu)\n", substr, strlen(substr));
     free(substr);
 
     return 0;

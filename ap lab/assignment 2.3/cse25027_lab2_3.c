@@ -6,21 +6,18 @@
 #define MAX_TREE_HT 256
 #define MAX_CHAR 256
 
-// Huffman Tree Node
 struct MinHeapNode {
     char data;
     unsigned freq;
     struct MinHeapNode *left, *right;
 };
 
-// Min Heap structure
 struct MinHeap {
     unsigned size;
     unsigned capacity;
     struct MinHeapNode** array;
 };
 
-// Create new node
 struct MinHeapNode* newNode(char data, unsigned freq) {
     struct MinHeapNode* temp = (struct MinHeapNode*)malloc(sizeof(struct MinHeapNode));
     temp->data = data;
@@ -29,7 +26,6 @@ struct MinHeapNode* newNode(char data, unsigned freq) {
     return temp;
 }
 
-// Create Min Heap
 struct MinHeap* createMinHeap(unsigned capacity) {
     struct MinHeap* minHeap = (struct MinHeap*)malloc(sizeof(struct MinHeap));
     minHeap->size = 0;
@@ -38,14 +34,12 @@ struct MinHeap* createMinHeap(unsigned capacity) {
     return minHeap;
 }
 
-// Swap
 void swapNode(struct MinHeapNode** a, struct MinHeapNode** b) {
     struct MinHeapNode* t = *a;
     *a = *b;
     *b = t;
 }
 
-// Heapify
 void minHeapify(struct MinHeap* minHeap, int idx) {
     int smallest = idx;
     int left = 2 * idx + 1;
@@ -120,7 +114,6 @@ struct MinHeapNode* buildHuffmanTree(char data[], int freq[], int size) {
     return extractMin(minHeap);
 }
 
-// Store Huffman codes
 void storeCodes(struct MinHeapNode* root, int arr[], int top, char codes[MAX_CHAR][MAX_TREE_HT]) {
     if (root->left) {
         arr[top] = 0;
@@ -138,13 +131,11 @@ void storeCodes(struct MinHeapNode* root, int arr[], int top, char codes[MAX_CHA
     }
 }
 
-// Calculate frequency
 void calculateFreq(const char *text, int freq[]) {
     for (int i = 0; text[i] != '\0'; i++)
         freq[(unsigned char)text[i]]++;
 }
 
-// Write compressed file
 void writeCompressed(const char *text, char codes[MAX_CHAR][MAX_TREE_HT]) {
     FILE *fp = fopen("output.huf", "wb");
     if (!fp) {
@@ -181,7 +172,6 @@ void writeCompressed(const char *text, char codes[MAX_CHAR][MAX_TREE_HT]) {
     printf("\nCompressed file saved as output.huf\n");
 }
 
-// Decode file
 void decompressFile(const char *filename) {
     FILE *fp = fopen(filename, "rb");
     if (!fp) {
@@ -208,7 +198,6 @@ void decompressFile(const char *filename) {
         }
     }
 
-    // Reverse lookup
     char reverse[MAX_CHAR][MAX_TREE_HT];
     for (int i = 0; i < MAX_CHAR; i++)
         if (strlen(codes[i]) > 0)
@@ -239,7 +228,6 @@ void decompressFile(const char *filename) {
     fclose(fp);
 }
 
-// Compare storage bits
 void compareStorage(const char *text, int uniqueChars, char codes[MAX_CHAR][MAX_TREE_HT]) {
     int asciiBits = strlen(text) * 8;
     int fixedBits = strlen(text) * (int)ceil(log2(uniqueChars));
@@ -294,13 +282,10 @@ int main() {
         if (strlen(codes[i]) > 0)
             printf("%c: %s\n", i, codes[i]);
 
-    // Part A: Compare storage
     compareStorage(text, size, codes);
 
-    // Part B: Write compressed file
     writeCompressed(text, codes);
 
-    // Part C: Decompress file
     printf("\n\nNow decompressing the file...\n");
     decompressFile("output.huf");
 

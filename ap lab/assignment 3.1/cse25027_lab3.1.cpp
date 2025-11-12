@@ -1,9 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <cstdlib>
+#include <ctime>
 
 #define MAX 100
+
+using namespace std;
 
 int adjMatrix[MAX][MAX];
 int visited[MAX];
@@ -11,46 +14,46 @@ int color[MAX];
 int nVertices = 0;
 
 // Function to read graph from adjacency list file and build adjacency matrix
-void readGraphFromFile(char *filename)
+void readGraphFromFile(const char *filename)
 {
-    FILE *fp = fopen(filename, "r");
-    if (!fp)
+    ifstream file(filename);
+    if (!file.is_open())
     {
-        printf("Error: Cannot open file %s\n", filename);
+        cout << "Error: Cannot open file " << filename << endl;
         exit(1);
     }
 
-    char line[256];
+    string line;
     int row = 0;
-    while (fgets(line, sizeof(line), fp))
+    while (getline(file, line))
     {
         row++;
-        char *token = strtok(line, ", ");
-        while (token != NULL)
+        stringstream ss(line);
+        string token;
+        while (getline(ss, token, ','))
         {
-            int col = atoi(token);
+            int col = atoi(token.c_str());
             if (col > 0 && col < MAX)
             {
                 adjMatrix[row][col] = 1;
             }
-            token = strtok(NULL, ", ");
         }
     }
-    fclose(fp);
+    file.close();
     nVertices = row;
 }
 
 // Function to display adjacency matrix
 void displayMatrix()
 {
-    printf("\nAdjacency Matrix (%d vertices):\n", nVertices);
+    cout << "\nAdjacency Matrix (" << nVertices << " vertices):\n";
     for (int i = 1; i <= nVertices; i++)
     {
         for (int j = 1; j <= nVertices; j++)
         {
-            printf("%d ", adjMatrix[i][j]);
+            cout << adjMatrix[i][j] << " ";
         }
-        printf("\n");
+        cout << endl;
     }
 }
 
@@ -58,7 +61,7 @@ void displayMatrix()
 void DFSUtil(int v)
 {
     visited[v] = 1;
-    printf("%d ", v);
+    cout << v << " ";
 
     for (int i = 1; i <= nVertices; i++)
     {
@@ -75,14 +78,14 @@ void findConnectedComponents()
     for (int i = 1; i <= nVertices; i++)
         visited[i] = 0;
 
-    printf("\nConnected Components (DFS):\n");
+    cout << "\nConnected Components (DFS):\n";
     for (int v = 1; v <= nVertices; v++)
     {
         if (!visited[v])
         {
-            printf("{ ");
+            cout << "{ ";
             DFSUtil(v);
-            printf("}\n");
+            cout << "}\n";
         }
     }
 }
@@ -125,7 +128,7 @@ int main(int argc, char *argv[])
 {
     if (argc < 2)
     {
-        printf("Usage: %s <filename>\n", argv[0]);
+        cout << "Usage: " << argv[0] << " <filename>\n";
         return 1;
     }
 
@@ -135,29 +138,31 @@ int main(int argc, char *argv[])
     int choice, start;
     srand(time(NULL));
 
-    printf("\nEnter starting vertex for DFS (0 for random): ");
-    scanf("%d", &start);
+    cout << "\nEnter starting vertex for DFS (0 for random): ";
+    cin >> start;
     if (start == 0)
         start = rand() % nVertices + 1;
-    printf("Starting DFS from vertex %d\n", start);
+    cout << "Starting DFS from vertex " << start << endl;
 
     for (int i = 1; i <= nVertices; i++)
         visited[i] = 0;
-    printf("DFS traversal from %d: ", start);
+
+    cout << "DFS traversal from " << start << ": ";
     DFSUtil(start);
-    printf("\n");
+    cout << endl;
+
     findConnectedComponents();
 
-    printf("\nEnter starting vertex for BFS (0 for random): ");
-    scanf("%d", &start);
+    cout << "\nEnter starting vertex for BFS (0 for random): ";
+    cin >> start;
     if (start == 0)
         start = rand() % nVertices + 1;
-    printf("Starting BFS from vertex %d\n", start);
+    cout << "Starting BFS from vertex " << start << endl;
 
     if (isBipartite(start))
-        printf("Graph is Bipartite.\n");
+        cout << "Graph is Bipartite." << endl;
     else
-        printf("Graph is NOT Bipartite.\n");
+        cout << "Graph is NOT Bipartite." << endl;
 
     return 0;
 }

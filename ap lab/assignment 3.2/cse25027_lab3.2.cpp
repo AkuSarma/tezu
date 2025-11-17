@@ -87,7 +87,7 @@ void kruskalMST(const vector<vector<int>>& graph, int V) {
         }
     }
 
-    cout << "\nMST using Kruskal’s Algorithm:\n";
+    cout << "\nMST using Kruskal's Algorithm:\n";
     int totalWeight = 0;
     for (auto edge : result) {
         cout << edge.src << " - " << edge.dest << " \tWeight: " << edge.weight << endl;
@@ -147,7 +147,7 @@ void primMST(const vector<vector<int>>& graph, int V) {
         }
     }
 
-    cout << "\nMST using Prim’s Algorithm:\n";
+    cout << "\nMST using Prim's Algorithm:\n";
     int totalWeight = 0;
     for (int i = 1; i < V; i++) {
         cout << parent[i] << " - " << i << " \tWeight: " << graph[i][parent[i]] << endl;

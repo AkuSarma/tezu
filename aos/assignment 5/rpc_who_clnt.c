@@ -4,20 +4,20 @@
  */
 
 #include <memory.h> /* for memset */
-#include "remote.h"
+#include "rpc_who.h"
 
 /* Default timeout can be changed using clnt_control() */
 static struct timeval TIMEOUT = { 25, 0 };
 
-char **
-get_users_1(void *argp, CLIENT *clnt)
+who_list *
+who_proc_1(void *argp, CLIENT *clnt)
 {
-	static char *clnt_res;
+	static who_list clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call (clnt, GET_USERS,
+	if (clnt_call (clnt, WHO_PROC,
 		(xdrproc_t) xdr_void, (caddr_t) argp,
-		(xdrproc_t) xdr_wrapstring, (caddr_t) &clnt_res,
+		(xdrproc_t) xdr_who_list, (caddr_t) &clnt_res,
 		TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}

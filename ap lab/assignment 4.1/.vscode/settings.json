@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.css": "css",
+        "iomanip": "cpp",
+        "cmath": "cpp"
+    }
+}

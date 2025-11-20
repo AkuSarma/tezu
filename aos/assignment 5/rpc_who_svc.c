@@ -3,7 +3,7 @@
  * It was generated using rpcgen.
  */
 
-#include "remote.h"
+#include "rpc_who.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <rpc/pmap_clnt.h>
@@ -31,10 +31,10 @@ who_prog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		(void) svc_sendreply (transp, (xdrproc_t) xdr_void, (char *)NULL);
 		return;
 
-	case GET_USERS:
+	case WHO_PROC:
 		_xdr_argument = (xdrproc_t) xdr_void;
-		_xdr_result = (xdrproc_t) xdr_wrapstring;
-		local = (char *(*)(char *, struct svc_req *)) get_users_1_svc;
+		_xdr_result = (xdrproc_t) xdr_who_list;
+		local = (char *(*)(char *, struct svc_req *)) who_proc_1_svc;
 		break;
 
 	default:

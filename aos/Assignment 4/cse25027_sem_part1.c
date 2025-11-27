@@ -33,7 +33,7 @@ int main()
     pid1 = fork();
     if (pid1 == 0)
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 3; i++)
         {
             int temp = *X;
             temp++;
@@ -47,7 +47,7 @@ int main()
     pid2 = fork();
     if (pid2 == 0)
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 3; i++)
         {
             int temp = *X;
             temp--;
@@ -61,7 +61,7 @@ int main()
     waitpid(pid1, NULL, 0);
     waitpid(pid2, NULL, 0);
 
-    printf("Final value of X (no synchronization): %d\n", *X);
+    printf("Final value of X: %d\n", *X);
 
     shmdt(X);
     shmctl(shm_id, IPC_RMID, NULL);

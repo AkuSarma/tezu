@@ -22,7 +22,7 @@ Matrix readMatrix(const string &filename) {
     string line;
 
     while (getline(file, line)) {
-        replace(line.begin(), line.end(), ',', ' '); // convert comma → space
+        replace(line.begin(), line.end(), ',', ' ');
         stringstream ss(line);
         vector<double> row;
         double val;

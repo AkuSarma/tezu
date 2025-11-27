@@ -76,6 +76,7 @@ BSTNode *bstDelete(BSTNode *root, string roll)
             return root->right;
         else if (!root->right)
             return root->left;
+
         BSTNode *temp = findMin(root->right);
         root->data = temp->data;
         root->right = bstDelete(root->right, temp->data.roll);
@@ -137,7 +138,10 @@ AVLNode *rotateLeft(AVLNode *x)
     return y;
 }
 
-int getBalance(AVLNode *n) { return n ? height(n->left) - height(n->right) : 0; }
+int getBalance(AVLNode *n)
+{
+    return n ? height(n->left) - height(n->right) : 0;
+}
 
 AVLNode *avlInsert(AVLNode *root, Student d)
 {
@@ -167,7 +171,6 @@ AVLNode *avlInsert(AVLNode *root, Student d)
         root->right = rotateRight(root->right);
         return rotateLeft(root);
     }
-
     return root;
 }
 
@@ -214,7 +217,7 @@ int main()
     while (true)
     {
         cout << "\n===== MENU =====\n";
-        cout << "1. Insert\n2. Delete (BST only)\n3. Search\n4. Display Sorted (AVL)\n5. Compare Heights\n6. Exit\nEnter choice: ";
+        cout << "1. Insert\n2. Delete (BST only)\n3. Search\n4. Display Sorted (AVL)\n5. Compare Heights\n6. Exit\n7. Display Sorted (BST)\nEnter choice: ";
         cin >> choice;
 
         if (choice == 1)
@@ -266,6 +269,12 @@ int main()
         else if (choice == 6)
         {
             break;
+        }
+
+        else if (choice == 7)
+        {
+            cout << "\nStudents Sorted (BST):\n";
+            inorderBST(bstRoot);
         }
 
         else

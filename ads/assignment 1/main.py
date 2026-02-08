@@ -18,10 +18,16 @@ def compute_grade(total : int) -> str:
 
 def add_student():
     '''
-    Create a new student detail with enrolment no., name, and all four marks. Compute and store total and grade.
+    Create a new student detail with enrolment no., name, and all four marks.
+    Compute and store total and grade.
     '''
     print("Enter enrolment no.:")
     enrollment_no = input().strip()
+
+    if r.exists(enrollment_no):
+        print("Student already exists.")
+        return
+
     print("Enter name:")
     name = input().strip()
     print("Enter marks for:")
@@ -34,57 +40,96 @@ def add_student():
     print(" - End-term:")
     end = int(input().strip())
 
+    total = st1 + mid + st2 + end
+
     r.hset(enrollment_no, mapping={
         'name': name,
         'st1': st1,
         'mid': mid,
         'st2': st2,
         'end': end,
-        'total': st1 + mid + st2 + end,
-        'grade': compute_grade(st1 + mid + st2 + end)
+        'total': total,
+        'grade': compute_grade(total)
     })
+
+    print("Student added successfully.")
+
 
 def update_marks():
     '''
-    Enter student enrolment no and which component to update (e.g., st1, mid) and recomputes total and grade.
+    Update marks and recompute total and grade.
     '''
     print("Enter enrolment no.:")
     enrollment_no = input().strip()
+
+    if not r.exists(enrollment_no):
+        print("Student not found.")
+        return
+
     print("Enter component to update (st1, mid, st2, end):")
     component = input().strip().lower()
+
+    if component not in ['st1', 'mid', 'st2', 'end']:
+        print("Invalid component.")
+        return
+
     print(f"Enter new marks for {component}:")
     new_marks = int(input().strip())
+
     r.hset(enrollment_no, component, new_marks)
-    
+
     st1 = int(r.hget(enrollment_no, 'st1') or 0)
     mid = int(r.hget(enrollment_no, 'mid') or 0)
     st2 = int(r.hget(enrollment_no, 'st2') or 0)
     end = int(r.hget(enrollment_no, 'end') or 0)
+
     total = st1 + mid + st2 + end
     grade = compute_grade(total)
+
     r.hset(enrollment_no, mapping={'total': total, 'grade': grade})
+
+    print("Marks updated successfully.")
+
 
 def view_student():
     '''
-    Enter student enrolment no and display all details (name, marks, total, grade) in a formatted way.
+    Display one student in table format.
     '''
     print("Enter enrolment no.:")
     enrollment_no = input().strip()
-    student_data = r.hgetall(enrollment_no)
-    if not student_data:
+
+    data = r.hgetall(enrollment_no)
+
+    if not data:
         print("Student not found.")
         return
-    print("Student Details:")
-    for key, value in student_data.items():
-        print(f"  {key}: {value}")
+
+    print("Enrolment No. | Name       | Test-1 | Mid-term | Test-2 | End-term | Total | Grade")
+    print("-" * 90)
+
+    print(
+        f"{enrollment_no:<13} | "
+        f"{data.get('name',''):<10} | "
+        f"{data.get('st1',''):<6} | "
+        f"{data.get('mid',''):<8} | "
+        f"{data.get('st2',''):<6} | "
+        f"{data.get('end',''):<8} | "
+        f"{data.get('total',''):<5} | "
+        f"{data.get('grade','')}"
+    )
+
 
 def delete_student():
     '''
-    Enter student enrolment no. and delete the detail.
+    Delete a student record.
     '''
     print("Enter enrolment no.:")
     enrollment_no = input().strip()
-    r.delete(enrollment_no)
+
+    if r.delete(enrollment_no):
+        print("Student deleted successfully.")
+    else:
+        print("Student not found.")
 
 def view_all_students():
     '''

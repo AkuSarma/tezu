@@ -3,24 +3,22 @@ from redis import Redis
 r = Redis(host='localhost', port=6379, decode_responses=True)
 
 def compute_grade(total : int) -> str:
-    if total >= 90:
+    if total >= 95:
         return 'O'
-    elif total >= 80:
+    elif total >= 85:
+        return 'A+'
+    elif total >= 75:
         return 'A'
-    elif total >= 70:
+    elif total >= 65:
+        return 'B+'
+    elif total >= 55:
         return 'B'
-    elif total >= 60:
-        return 'C'
-    elif total >= 50:
-        return 'D'
+    elif total >= 45:
+        return 'P'
     else:
         return 'F'
 
 def add_student():
-    '''
-    Create a new student detail with enrolment no., name, and all four marks.
-    Compute and store total and grade.
-    '''
     print("Enter enrolment no.:")
     enrollment_no = input().strip()
 
@@ -56,9 +54,6 @@ def add_student():
 
 
 def update_marks():
-    '''
-    Update marks and recompute total and grade.
-    '''
     print("Enter enrolment no.:")
     enrollment_no = input().strip()
 
@@ -92,9 +87,6 @@ def update_marks():
 
 
 def view_student():
-    '''
-    Display one student in table format.
-    '''
     print("Enter enrolment no.:")
     enrollment_no = input().strip()
 
@@ -120,9 +112,6 @@ def view_student():
 
 
 def delete_student():
-    '''
-    Delete a student record.
-    '''
     print("Enter enrolment no.:")
     enrollment_no = input().strip()
 
@@ -132,9 +121,6 @@ def delete_student():
         print("Student not found.")
 
 def view_all_students():
-    '''
-    Display a table of all students with enrolment no., Name, ST1, Mid, ST2, End, Total, Grade.
-    '''
     print("Enrolment No. | Name       | Test-1 | Mid-term | Test-2 | End-term | Total | Grade")
     print("-" * 90)
 
@@ -162,7 +148,7 @@ def view_all_students():
 
     if not found:
         print("No student records found.")
-("--------------------------------------------------------------------------")
+    
 
 if __name__ == '__main__':
     while(True):

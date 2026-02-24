@@ -1,7 +1,3 @@
-*.exe
-venv/
-venv*/
-*.class
 # Logs
 logs
 *.log

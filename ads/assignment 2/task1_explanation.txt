@@ -1,0 +1,49 @@
+Hybrid SQL + NoSQL Architecture
+
+This project implements a hybrid database architecture combining relational SQL databases and NoSQL document databases to handle different types of data efficiently.
+
+SQL Database (PostgreSQL)
+
+The relational database stores transactional and structured data requiring strong consistency and ACID properties. The following tables are created:
+
+users – stores user information such as name, email, and password hash.
+
+products – contains core product information including price, category, and stock quantity.
+
+orders – records each purchase made by users.
+
+order_items – maintains details of products included in each order.
+
+These tables use primary keys, foreign keys, and constraints to maintain data integrity and consistency. For example, the orders.user_id references the users table to ensure that orders belong to valid users.
+
+This relational model is ideal for transactions such as placing orders and managing inventory, where accuracy and atomic operations are important.
+
+NoSQL Database (MongoDB)
+
+MongoDB stores semi-structured and flexible data that may vary in structure or grow over time.
+
+Two collections are designed:
+
+product_details
+
+Stores additional product information such as descriptions, images, attributes, and reviews.
+
+Reviews are stored as embedded documents in an array, allowing easy retrieval of all reviews for a product.
+
+activity_logs
+
+Tracks user actions such as viewing products, adding items to cart, and purchases.
+
+Each user document contains an array of actions with timestamps and details.
+
+MongoDB is suitable here because product descriptions, attributes, and activity logs may change frequently and do not require rigid schemas.
+
+Benefits of the Hybrid Approach
+
+This architecture combines the strengths of both database systems:
+
+SQL (ACID) ensures reliability and consistency for financial transactions like orders and inventory updates.
+
+NoSQL (BASE) provides scalability and flexibility for large volumes of semi-structured data like product reviews and user activity logs.
+
+By separating these workloads, the system achieves better scalability, maintainability, and performance, similar to architectures used by modern e-commerce platforms.

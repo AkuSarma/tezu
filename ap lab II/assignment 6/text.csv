@@ -1,0 +1,45 @@
+Name,Address,City,Rating,CostForTwo
+Cafe Aroma,Connaught Place,Delhi,4.5,1200
+Hotel Grand Palace,Karol Bagh,Delhi,4.2,2000
+Urban Tandoor,Saket,Delhi,4.1,1800
+Green Leaf Cafe,Hauz Khas,Delhi,4,1100
+Skyline Dine,Greater Kailash,Delhi,4.6,2500
+Hotel Blue Orchid,Dwarka,Delhi,4.4,1900
+Spice Route Bistro,Rohini,Delhi,3.9,1500
+Royal Dine Inn,Janakpuri,Delhi,4.3,1600
+,,,,
+Cafe Mocha,Bandra,Mumbai,4.3,1400
+Hotel Sea View,Marine Drive,Mumbai,4.6,3000
+Bombay Bites,Andheri,Mumbai,3.7,1300
+Urban Masala,Lower Parel,Mumbai,4.2,1700
+Cafe Coastal,Juhu,Mumbai,4.8,2100
+Hotel Regal Stay,Colaba,Mumbai,3.9,2500
+Spice Symphony,Malad,Mumbai,4.1,1600
+Cafe Marine Bay,Churchgate,Mumbai,4.5,1800
+,,,,
+Cafe Silicon Valley,Indiranagar,Bangalore,4.6,1500
+Hotel Tech Park,Whitefield,Bangalore,4.3,2800
+Gardenia Bistro,Koramangala,Bangalore,4.1,1700
+Cafe Byte,MG Road,Bangalore,4.4,1200
+Royal Orchid Hotel,Electronic City,Bangalore,4.2,2600
+Urban Dine,Yelahanka,Bangalore,3.8,1400
+Cafe Green Brew,Jayanagar,Bangalore,4.7,1300
+Sky Lounge,Hebbal,Bangalore,4.5,3000
+,,,,
+Cafe Heritage,T Nagar,Chennai,4.4,1300
+Hotel Marina Bay,Anna Nagar,Chennai,4.2,2400
+Southern Spice,Velachery,Chennai,4.1,1500
+Cafe Bay Breeze,Adyar,Chennai,4.6,1100
+Hotel Temple View,Mylapore,Chennai,3.8,2100
+Urban Flavors,Guindy,Chennai,4.3,1700
+Golden Curry House,Nungambakkam,Chennai,4,1600
+Cafe Madras Delight,Egmore,Chennai,4.7,1000
+,,,,
+Cafe Pink City,MI Road,Jaipur,4.3,1200
+Hotel Raj Palace,C Scheme,Jaipur,4.6,3200
+Desert Dine,Bapu Nagar,Jaipur,4,1500
+Cafe Royal Treat,Malviya Nagar,Jaipur,4.4,1300
+Hotel Heritage Inn,Vaishali Nagar,Jaipur,3.9,2400
+Spice Villa,Tonk Road,Jaipur,4.2,1700
+Cafe Sunset Lounge,Amer Road,Jaipur,4.5,1800
+Golden Thali,Johari Bazaar,Jaipur,4.1,1400

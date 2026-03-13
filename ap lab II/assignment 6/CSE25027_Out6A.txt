@@ -1,0 +1,7 @@
+Name | Address | City | Rating | CostForTwo
+Cafe Aroma | Connaught Place | Delhi | 4.5 | 1200
+Hotel Grand Palace | Karol Bagh | Delhi | 4.2 | 2000
+Urban Tandoor | Saket | Delhi | 4.1 | 1800
+Skyline Dine | Greater Kailash | Delhi | 4.6 | 2500
+Hotel Blue Orchid | Dwarka | Delhi | 4.4 | 1900
+Royal Dine Inn | Janakpuri | Delhi | 4.3 | 1600

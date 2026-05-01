@@ -16,7 +16,6 @@ count=0
 
 tail -n +2 "$input_file" | while IFS=',' read name address city_name rating_val cost
 do
-    # Skip empty rows
     if [[ -z "$name" ]]; then
         continue
     fi

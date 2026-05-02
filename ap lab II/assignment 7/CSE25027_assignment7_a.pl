@@ -2,9 +2,9 @@
 use strict;
 use warnings;
 
-my $input = "input.html";        # your HTML file
-my $output = "output.html";      # cleaned HTML file
-my $links_file = "links.txt";    # extracted links
+my $input = "input.html";        
+my $output = "output.html";      
+my $links_file = "links.txt";    
 
 open(my $in, '<', $input) or die "Cannot open input file\n";
 open(my $out, '>', $output) or die "Cannot create output file\n";
